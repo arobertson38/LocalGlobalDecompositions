@@ -115,11 +115,11 @@ if __name__ == "__main__":
     print(in_dict)
     
     # checking the mode argument
-    if args.mode.lower() == 'NBSA':
+    if args.mode.lower() == 'nbsa':
         filename = new_filename('NBSA', in_dict)
         write_config('./configs/BASELINES/cs1_NBSA_config.yml', filename, in_dict)
 
-    elif args.mode.lower() == 'TI':
+    elif args.mode.lower() == 'ti':
         filename = new_filename('TI', in_dict)
         write_config('./configs/BASELINES/cs2_TI_config.yml', filename, in_dict)
 
