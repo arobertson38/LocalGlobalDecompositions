@@ -4,12 +4,13 @@ I swear its the most finky code because of all the
 relative imports that it has to do. 
 
 """
-from MKS.utils.TestingSuite import TestingSuite, save_plot_examples
+import MKS.utils.TestingSuite as ts
 from MKS.utils.HelperFunctions import loss_SBG
 import argparse
 import torch
 import os
 import numpy as np
+import MKS.utils.HelperFunctions as hfunc
 
 def binarize(structs, means=None):
     """
@@ -73,9 +74,15 @@ if __name__ == "__main__":
     
     args = parser.parse_args()
     data = torch.load(os.path.join(args.image_folder, args.micro))
-    data = binarize(data)
 
-    tester = TestingSuite(mode=args.mode)
+    # test:
+    if args.mode.lower() == "nbsa":
+        # its the Case Study 1 data and should be tested as such. 
+        tester = ts.TestingSuite(mode=args.mode)
+        data = binarize(data)
+    elif args.mode.lower() == 'ti':
+        tester = ts.TestingSuite_3Phase(mode='TI64')
+        data = hfunc.threshold_torch(data).float()
     tester.complete_suite(data, args.image_folder)
 
     # saving the image of the training error as well
@@ -83,6 +90,6 @@ if __name__ == "__main__":
             os.path.join(args.image_folder, 'TestTrainLoss.png'))
 
     # displaying some examples as well
-    save_plot_examples(data, \
+    ts.save_plot_examples(data, \
             os.path.join(args.image_folder, 'Comparison.png'))
 

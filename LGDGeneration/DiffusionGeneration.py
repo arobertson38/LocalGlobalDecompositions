@@ -20,15 +20,24 @@ import MKS.utils.HelperFunctions as hfuncs
 # Useful Utility Methods
 # --------------------------------------------
 
-def dict2namespace(config):
-    namespace = argparse.Namespace()
-    for key, value in config.items():
-        if isinstance(value, dict):
-            new_value = dict2namespace(value)
+def dict2namespace(dictionary):
+    """
+    Transforms a dictionary into a namespace. 
+
+    Args:
+        dictionary (dict): A (possibly recursive) python
+                           dictionary.
+    """
+    items = {}
+    for keyword, item in dictionary.items():
+        if isinstance(item, dict):
+            # we want to satisfactorally handle this
+            # item before adding it to our dictionary. 
+            items[keyword] = dict2namespace(item)
         else:
-            new_value = value
-        setattr(namespace, key, new_value)
-    return namespace
+            items[keyword] = item
+    
+    return argparse.Namespace(**items)
 
 def parse_config(config):
     """
