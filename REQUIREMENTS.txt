@@ -1,0 +1,12 @@
+Not an actual requirements file, but a list of the 
+necessary packages to run everything. 
+
+--------------------------
+torch/cuda combo. => i used torch 1.13.1 and cuda 11.7
+numpy==1.22.1
+scikit-learn==1.1.2
+pyyaml
+tqdm
+scipy
+tensorboardX
+h5py

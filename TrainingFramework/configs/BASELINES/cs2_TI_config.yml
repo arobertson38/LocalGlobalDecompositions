@@ -1,0 +1,64 @@
+# CAUTION: the config file contains some options that are no longer supported. 
+# We have marked these with the phrase 'the following should be left alone'
+data: # Defining the dataset used for training and the training parameters. 
+  channels: 3
+  data_location: ./datasets/TI_index2_ps64_0d25_8k_UNFILTERED.pth
+  image_size: 64
+  test_train_fraction: 0.85
+  # the following should be left alone.
+  dataset: NBSA # changing the dataset should be done manually via data_location option.
+  logit_transform: false
+  random_flip: false
+model: # Defining the model and diffusion process hyperparameters
+  model: vnetd4
+  num_classes: 1000
+  sigma_begin: 50.0
+  sigma_end: 0.01
+  initialize: default
+  # the following should be left alone.
+  ngf: 1 # this does nothing.
+  sigma_rescaling: true
+  batch_norm: false
+model_structure: # Defining the trainable model hyperparameters. 
+  activation: prelu
+  activation_all: true
+  latent_features: 100 # number of latent dimensions.
+  num_blocks: 1 # number of pre and post convolutions appended to the U-Net.
+  norm: InstanceNorm2dPlus
+optim: # optimization hyperparameters.
+  # (CAUTION: NOT ALL OF THESE ARE ACTIVE FOR ALL COMBINATIONS OF
+  # OPTIMIZERS, SCHEDULERS, and SWAs)
+  #
+  # General optimization parameters
+  optimizer: Adam
+  beta1: 0.9
+  grad_clip: 1.0
+  lr: 0.01
+  weight_decay: 0.0
+  amsgrad: false
+  ## learning rate scheduler parameters: ('constant' 'expcycling', 'onecycle')
+  scheduler: onecycle
+  # hyperparameters for onecycle:
+  # In onecycle, lr is reused for the upper limit.
+  initial_div: 10
+  final_div: 100
+  pct_start: 0.3
+  # hyperparameters for expcycling:
+  # In expcycling, lr is reused for the lower limit.
+  cycle: 50050
+  max_lr: 0.02
+  # SWA: Stochastic Weighted Averaging. ('none', 'swa', 'ema')
+  swa: ema
+  swalr: 1.0e-05
+  ema_param: 0.999
+  start_percentage: 0.75
+training: # Training hyperparameters
+  algo: dsm
+  anneal_power: 2.0 # the power on the DSM error function. I don't recommend changing.
+  batch_size: 128
+  n_iters: 750001 # the number of training iterations.
+  snapshot_freq: 20000
+  # the following should be left alone.
+  n_frozen_layers: 0
+  ngpu: 1
+  n_epochs: 90000000
