@@ -16,16 +16,30 @@ GNU General Public License for more details.
 A copy of the GNU General Public License is provided below. The license
 can also be viewed at <https://www.gnu.org/licenses/>.
 
-Additionally, this repository contains modified elements from 
-the Ermon Group's NCSN repository. The following files 
-contain modified code from their original work:
+Additionally, this repository contains modified elements from
+several other repositories. 
 
-  (1) main.py
-  (2)
+The following files contain modified code from the Ermon Group's
+'NCSN' repository:
+
+  (1) TrainingFramework/main.py
+  (2) TrainingFramework/runners/anneal_runner.py
+  (2) TrainingFramework/losses/*
  
 The NCSN repository is licensed under the GPLv3 license:
 Copyright (C) 2019 Yang Song
 It can be found at: <https://github.com/ermongroup/ncsn>
+
+The following files contain modified code from Yang Song's
+'score_sde_pytorch' repository:
+
+  (1) */models/utils.py (specifically, the attention mechanisms)
+
+Here, '*' refers to any folder containing a 'models' subfolder.
+
+The NCSN repository is licensed under the GPLv3 license:
+Copyright (C) 2021 Yang Song
+It can be found at: <https://github.com/yang-song/score_sde_pytorch>
 
 --------------------------------------------------------------------------
 
