@@ -13,4 +13,4 @@ python config_cleaner.py --folder Results/logs/NBSA
 
 Rem Testing
 python main.py --runner AnnealRunner --config cs1_NBSA_config.yml --run Results --doc NBSA --image_folder Results/logs/NBSA/out --test
-python error.py --image_folder Results/logs/NBSA/out --micro uncond_samples.pth --mode NBSA --stdout Results/logs/NBSA
+Rem python error.py --image_folder Results/logs/NBSA/out --micro uncond_samples.pth --mode NBSA --stdout Results/logs/NBSA
