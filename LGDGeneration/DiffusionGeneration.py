@@ -9,12 +9,73 @@ import torch.nn as nn
 import torch
 import os
 import torch.optim as optim
-import models.small as small
-import models.vnet as vnet
-import models.deepvnet as deepvnet
 import yaml
 import argparse
 import MKS.utils.HelperFunctions as hfuncs
+import MKS.DMKSGeneration.StochasticGeneration as generators
+import models.small as small
+import models.vnet as vnet
+import models.deepvnet as deepvnet
+
+# --------------------------------------------
+# Generator implementations specialized to this problem. 
+# --------------------------------------------
+
+class EigenGenerator(generators.EigenGenerator_SquareLocalNMaximumConstrained):
+    """
+    This model is just an extension of the final generator I built
+    for the GRF paper. Specifically, I am overwriting the generate
+    method to return three versions:
+
+    (1) the output of the GRF
+    (2) the filtered output of the GRF
+    (3) the filtered and postprocessed output of the GRF
+    """
+    def generate(self, number_of_structures=2):
+        """
+        Honestly, I SHOULD NOT BE DOING THIS. I AM WRITING OVER
+        AN EXISTING METHOD FROM 2 LEVELS OF INHERITENCE AGO. BUT...
+        YOLO.
+
+        - Andreas
+
+
+        This is a function to generate just the highest phase
+        :param number_of_structures: a parameter which indicates the number of stuctures to
+        generate. The number must be either 1 or 2.
+        :return:
+        """
+        self.generator()
+        self.grf_output = []
+        self.filtered_output = []
+        self.images = []
+
+        if (number_of_structures > 2) or (number_of_structures < 1):
+            raise ValueError('number_of_structures parameter must be either 1 or 2.')
+
+        for gen_iterator in range(0, number_of_structures):
+            struct = np.ones_like(self.two_point_fft)
+            struct *= np.fft.fftn(self.new[gen_iterator])[..., np.newaxis]
+            # grf sample
+            struct = struct * self.interfilter
+            self.grf_output.append(np.fft.ifftn( \
+                    struct, \
+                    axes=tuple(range(0, self.shape.__len__()))).real.copy())
+
+            # smoothed sample
+            struct = struct * self.filters
+            self.filtered_output.append(np.fft.ifftn( \
+                    struct, \
+                    axes=tuple(range(0, self.shape.__len__()))).real.copy())
+
+            # postprocessed output
+            struct = self.postprocess(np.fft.ifftn( \
+                    struct, \
+                    axes=tuple(range(0, self.shape.__len__()))).real)
+            self.images.append(struct.copy())
+
+        return self.grf_output, self.filtered_output, self.images
+
 
 # --------------------------------------------
 # Useful Utility Methods
