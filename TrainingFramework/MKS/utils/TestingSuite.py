@@ -83,39 +83,9 @@ def pca_plotting(arr_test, arr_nbsa, xlabel, f, ax, pc1, pc2):
 
 def settings(mode):
     """ Returns the location of the comparison files for the Testing Suite """
-    if mode.lower() == 'exp':
-        comp_loc='./MKS/utils/ReferenceDataTestingSuite/76XX_EXP_DataV2NoRotComparison.h5'
-        pca_comp='./MKS/utils/ReferenceDataTestingSuite/pcaModel_76XX_EXP_DataV2NoRotComparison.pkl'
-
-    elif mode.lower() == 'pymks':
-        comp_loc='./MKS/utils/ReferenceDataTestingSuite/76XX_NBSA_pymksapprox.h5'
-        pca_comp='./MKS/utils/ReferenceDataTestingSuite/pcaModel_76XX_NBSA_pymksapprox.pkl'
-
-    elif mode.lower() == 'exp1116':
-        comp_loc='./MKS/utils/ReferenceDataTestingSuite/NBSA_index11_ps16.h5'
-        pca_comp='./MKS/utils/ReferenceDataTestingSuite/pcaModel_NBSA_index11_ps16.pkl'
-
-    elif mode.lower() == 'exp1416':
-        comp_loc='./MKS/utils/ReferenceDataTestingSuite/NBSA_index14_ps16.h5'
-        pca_comp='./MKS/utils/ReferenceDataTestingSuite/pcaModel_NBSA_index14_ps16.pkl'
-
-    elif mode.lower() == 'exp1120':
-        comp_loc='./MKS/utils/ReferenceDataTestingSuite/NBSA_index11_ps20.h5'
-        pca_comp='./MKS/utils/ReferenceDataTestingSuite/pcaModel_NBSA_index11_ps20.pkl'
-
-    elif mode.lower() == 'exp1420':
-        comp_loc='./MKS/utils/ReferenceDataTestingSuite/NBSA_index14_ps20.h5'
-        pca_comp='./MKS/utils/ReferenceDataTestingSuite/pcaModel_NBSA_index14_ps20.pkl'
-
-    elif mode.lower() == 'exp1428':
-        comp_loc='./MKS/utils/ReferenceDataTestingSuite/NBSA_index14_ps28_512.h5'
-        pca_comp='./MKS/utils/ReferenceDataTestingSuite/pcaModel_NBSA_index14_ps28_512.pkl'
-
-    elif mode.lower() == 'exp1440':
-        comp_loc='./MKS/utils/ReferenceDataTestingSuite/NBSA_index14_ps40_512.h5'
-        pca_comp='./MKS/utils/ReferenceDataTestingSuite/pcaModel_NBSA_index14_ps40_512.pkl'
-
-
+    if mode.lower() == 'nbsa':
+        comp_loc='./MKS/utils/ReferenceDataTestingSuite/NBSA_index14_ps40_256.h5'
+        pca_comp='./MKS/utils/ReferenceDataTestingSuite/pcaModel_NBSA_index14_ps40_256.pkl'
     else:
         raise NotImplementedError(f"{mode} is not supported.")
 
@@ -124,10 +94,10 @@ def settings(mode):
 def settings_nphase(mode):
     """ Returns the location of the comparison files for the Testing Suite """
 
-    if mode.lower() == 'ti40':
-        comp_loc='./MKS/utils/ReferenceDataTestingSuite/TI_index3_ps40_ux40.h5'
-        pca_comp='./MKS/utils/ReferenceDataTestingSuite/pcaModel_TI_index3_ps40_ux40.pkl'
-        pca_stds='./MKS/utils/ReferenceDataTestingSuite/pcaModel_TI_index3_ps40_ux40_stds.pkl'
+    if mode.lower() == 'ti64':
+        comp_loc='./MKS/utils/ReferenceDataTestingSuite/TI_index2_ps64_0d25_8k_UNFILTERED.h5'
+        pca_comp='./MKS/utils/ReferenceDataTestingSuite/pcaModel_TI_index2_ps64_0d25_8k_UNFILTERED.pkl'
+        pca_stds='./MKS/utils/ReferenceDataTestingSuite/pcaModel_TI_index2_ps64_0d25_8k_UNFILTERED_stds.pkl'
 
     else:
         raise NotImplementedError(f"{mode} is not supported.")
