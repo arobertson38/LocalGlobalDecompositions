@@ -44,11 +44,12 @@ def CaseStudy1_TrueVFImplementation():
     grf = diffusion.EigenGenerator(
         statistics = stats,
     )
+    grf.filter()
     
     # Define the local neighborhood approximation:
     sbg = diffusion.TrueVFConditioned_CDGenerator(
         config = './materials/NBSA/config.yml',
-        model_location = './materials/NBSA/swa_checkpoint.yml',
+        model_location = './materials/NBSA/swa_checkpoint.pth',
     )
 
     # Performing Sampling:
@@ -125,11 +126,12 @@ def CaseStudy1_DirectVFImplementation():
     grf = diffusion.EigenGenerator(
         statistics = stats,
     )
+    grf.filter()
     
     # Define the local neighborhood approximation:
     sbg = diffusion.DirectAverageVFConditioned_CDGenerator(
         config = './materials/NBSA/config.yml',
-        model_location = './materials/NBSA/swa_checkpoint.yml',
+        model_location = './materials/NBSA/swa_checkpoint.pth',
     )
 
     # Performing Sampling:
@@ -157,7 +159,7 @@ def CaseStudy1_DirectVFImplementation():
             framework_output,
             1.0 - framework_output,
         ], dim = 1
-    ).numpy().float()
+    ).numpy().astype(float)
     framework_output = hfuncs.threshold_vfenforced(framework_output).astype(int)
 
     # plotting
@@ -195,11 +197,12 @@ def CaseStudy2_TrueVFImplementation():
     grf = diffusion.EigenGenerator(
         statistics = stats,
     )
+    grf.filter()
     
     # Define the local neighborhood approximation:
     sbg = diffusion.TrueVFConditioned_CDGenerator(
-        config = './materials/NBSA/config.yml',
-        model_location = './materials/NBSA/swa_checkpoint.yml',
+        config = './materials/TI/config.yml',
+        model_location = './materials/TI/swa_checkpoint.pth',
     )
 
     # Performing Sampling:
