@@ -146,7 +146,7 @@ if __name__ == "__main__":
 
         # running the method
         make_NBSA_datasets(
-            data = micros,
+            micros = micros,
             patch_size = patch_size,
             num_patches = num_patches,
             save_location = save_location,
@@ -163,7 +163,7 @@ if __name__ == "__main__":
 
         # running the method
         make_TI_datasets(
-            data = micros,
+            micros = micros,
             patch_size = patch_size,
             num_patches = num_patches,
             save_location = save_location,
