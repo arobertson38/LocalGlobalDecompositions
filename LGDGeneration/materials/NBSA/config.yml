@@ -1,0 +1,50 @@
+##python/object:argparse.Namespace
+data: ##python/object:argparse.Namespace
+  channels: 1
+  data_location: ./datasets/NBSA_index14_ps40_256.pth
+  dataset: NBSA
+  image_size: 40
+  logit_transform: false
+  random_flip: false
+  test_train_fraction: 0.85
+model: ##python/object:argparse.Namespace
+  batch_norm: false
+  initialize: default
+  model: vnetd2
+  ngf: 1
+  num_classes: 1000
+  sigma_begin: 20.0
+  sigma_end: 0.01
+  sigma_rescaling: true
+model_structure: ##python/object:argparse.Namespace
+  activation: prelu
+  activation_all: true
+  latent_features: 40
+  norm: InstanceNorm2dPlus
+  num_blocks: 1
+optim: ##python/object:argparse.Namespace
+  amsgrad: false
+  beta1: 0.9
+  cycle: 100050
+  ema_param: 0.999
+  final_div: 100
+  grad_clip: 1.0
+  initial_div: 10
+  lr: 0.01
+  max_lr: 0.02
+  optimizer: Adam
+  pct_start: 0.3
+  scheduler: onecycle
+  start_percentage: 0.75
+  swa: ema
+  swalr: 1.0e-05
+  weight_decay: 0.0
+training: ##python/object:argparse.Namespace
+  algo: dsm
+  anneal_power: 2.0
+  batch_size: 128
+  n_epochs: 900000
+  n_frozen_layers: 0
+  n_iters: 500001
+  ngpu: 1
+  snapshot_freq: 25000

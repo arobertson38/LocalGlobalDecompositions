@@ -1,0 +1,22 @@
+Future Viewer,
+
+The subfolder of this folder contain the original
+microstructures and the trained models that were extracted
+from them. 
+
+Each folder contains four files:
+
+    (1) reference.pth -- this is the original microstructure stored
+                         as a torch tensor. 
+    (2) checkpoint.pth -- this is the saved model without EMA/SWA. 
+    (3) swa_checkpoint.pth -- this is the saved EMA/SWA model. 
+    (4) config.yml -- this is the config file used to generate these
+                      microstructures. I apologize that it is less
+                      cleaned up than the config files in training. 
+
+In both Case Studies, we utilized the swa model:
+'swa_checkpoint.pth'. 
+
+Good luck,
+
+Andreas
