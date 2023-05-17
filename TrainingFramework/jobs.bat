@@ -11,6 +11,6 @@ Rem starting the running loop
 python main.py --runner AnnealRunner --config cs1_NBSA_config.yml --run Results --doc NBSA
 python config_cleaner.py --folder Results/logs/NBSA
 
-Rem Testing
+Rem Testing -- generating example neighborhoods and, subsequently, running analysis on them if available.
 python main.py --runner AnnealRunner --config cs1_NBSA_config.yml --run Results --doc NBSA --image_folder Results/logs/NBSA/out --test
 Rem python error.py --image_folder Results/logs/NBSA/out --micro uncond_samples.pth --mode NBSA --stdout Results/logs/NBSA
