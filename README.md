@@ -1,8 +1,5 @@
 # Local Global Decompositions
-
-THIS REPOSITORY IS CURRENTLY IMCOMPLETE. IT WILL BE COMPLETELY POPULATED BY MAY 19TH, 2023. 
-
-This repository contains research code associated with the proposed generative models in Robertson et al's "Local-Global Decompositions for Conditional Microstructure Generation". First, it contains the developed training environment for training the score-based diffusion models utilized as the local state in the paper (in TrainingFramework). Second, the repository contains the trained local SBG models and constructed LGD models utilized in Case Studies 1 and 2 as well as code to perform sampling (in LGDGeneration). As a warning, this code is definitely "research code". It was developed during the research process and, as a result, is rather messy. The biggest source of this is the proliferation of utilities that proved unnecessary. For example, during the research process we tested the impact of varying the initialization scheme -- it had no impact, but the code to do it remains in the training environment. 
+This repository contains research code associated with the proposed generative models in Robertson *et al.*'s *Local-Global Decompositions for Conditional Microstructure Generation*. First, it contains the developed training environment for training the score-based diffusion models utilized in the paper to approximate the local neighborhood distributions (in TrainingFramework). As a warning, this code is definitely "research code". It was developed during the research process and, as a result, is rather messy. The biggest source of this is the proliferation of unnecessary utilities. For example, during the research process we tested the impact of varying the initialization scheme -- it had no impact, but the code to do it remains in the training environment. Second, the repository contains the trained local SBG models and constructed LGD models utilized in Case Studies 1 and 2 as well as code to perform sampling (in LGDGeneration). 
 
 If you find the contents of this folder useful, we hope that you cite us in your future work via the following pertitent publications:
 
@@ -36,12 +33,16 @@ This folder -- perhaps unsurprisingly -- contains the training framework for the
 5. models: a folder containing various lightweight model implementations following the strategy described in the LGD paper.
 6. runners: contains the primary workhorse code for executing training.
 7. *config_cleaner.py*: a script for cleaning the config file spit out by the training framework. 
-8. *config_writer.py*: a script for editing the baseline config files and generating new config files. This script is especially useful when running a batch of training processes with different training parameters in parallel on a computing cluster. The code takes two types of flags: --mode (currently supports NBSA and TI) which indicates which baseline config file to begin with and --input which indicates which input in the config file to edit. After the --input flag, you must identify the section, parameter, and value you want changed. For example, the following code will edit the number of channels, image size, and model in the NBSA baseline config. The code will output a config file named by appending the changed values. Periods are turned into 'd's. The name is ordered by section and order in which the section was called in the command line.  
+8. *config_writer.py*: a script for editing the baseline config files and generating new config files. This script is especially useful when running a batch of training processes with different training parameters in parallel on a computing cluster. The code takes two types of flags: --mode (currently supports NBSA and TI) which indicates which baseline config file to begin with and --input which indicates which input in the config file to edit. After the --input flag, you must identify the section, parameter, and value you want changed. For example, the following code will edit the number of channels, image size, and model in the NBSA baseline config. The code will output a config file named by appending the changed values. Periods are turned into 'd's. The name is ordered by section and order in which the section was called in the command line. For example, this command will save the file *refNBSA_channels3_image_size70d20_modelvnetd4.yml*.
+
         python config_writer.py --mode NBSA --input data channels 3 --input model model vnetd4 --input data image_size 70.20  
-For example, this command will save the file *refNBSA_channels3_image_size70d20_modelvnetd4.yml*  
+ 
 9. *error.py*: a script for running some of the error testing described in the paper. This analysis requires reference statistics to be collected which can be collected via the code in the *GeneratingDatasets.py* file. Additionally, the reference statistics need to be appended to the *settings* method in the *TestingSuite.py* file in MKS/utils. Generally, feel free to contact us if you are having trouble setting this up, there are a lot of moving parts.
 10. *GeneratingDataset.py*: code for generating patch datasets (and reference statistics for the error computation) from a reference image. Datasets for the two examples decribed in the paper can be generated using the reference images provided in LGDGeneration/materials. 
-11. *jobs.bat* a bat file for running the training regime on a windows computer. For Linux machines, this can be translated easily into an equivalent bash file. 
+11. *jobs.bat* a bat file for running the training regime on a windows computer. For Linux machines, this can be translated easily into an equivalent bash file. It can be run directly in the command line as:
+
+        ./jobs.bat
+
 
 Good luck!
 
