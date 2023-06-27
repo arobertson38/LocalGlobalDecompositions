@@ -91,7 +91,12 @@ def make_NBSA_datasets(
             total_patches = num_patches)
 
     torch.save(patches.float(), save_location)
-    
+
+    # check if reference folder has been instantiated. 
+    if not os.path.exists('./MKS/utils/ReferenceDataTestingSuite'):
+        os.mkdir('./MKS/utils/ReferenceDataTestingSuite/')
+
+    # save error methods reference files.
     if error_file_tag is not None:
         ts.create_reference_files(
                 save_location,
@@ -127,7 +132,12 @@ def make_TI_datasets(
             total_patches = num_patches)
 
     torch.save(patches.float(), save_location)
-    
+
+    # check if reference folder has been instantiated. 
+    if not os.path.exists('./MKS/utils/ReferenceDataTestingSuite'):
+        os.mkdir('./MKS/utils/ReferenceDataTestingSuite/')
+
+    # save error methods reference files.
     if error_file_tag is not None:
         ts.create_reference_files_Nphase(
                 save_location,
