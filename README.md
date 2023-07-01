@@ -27,7 +27,9 @@ To run the example generation, switch your working repository to the LGDGenerati
 This folder -- perhaps unsurprisingly -- contains the training framework for the proposed models. 
 
 1. configs: a folder containing the config files. The 'cs1_NBSA_config.yml' and 'cs2_NBSA_config.yml' config files contain the training parameters utilized in the reported case studies. The BASELINES folder contains baseline config files. These are config files utilized by *config_writer.py* to generate wide range of config files if one is performing a sweep of many training settings. 
-2. datasets: When utilizing this training framework, the local patch dataset should be placed in this folder. If you are interested in the datasets we used to perform training, please contact the email above. We don't include the datasets here due to size. Otherwise, datasets can be generated from a large experimental image using the *GeneratingDatasets.py* script provided. Similar datasets to the ones used can be generated using the reference images provided in the LGDGeneration folder. 
+2. datasets: When utilizing this training framework, the local patch dataset should be placed in this folder. If you are interested in the datasets we used to perform training, please contact the email above. We don't include the datasets here due to size. Otherwise, datasets can be generated from a large experimental image using the *GeneratingDatasets.py* script provided. Similar datasets to the ones used can be generated using the reference images provided in the LGDGeneration folder. These references are located at:
+  - NBSA: DMKSGeneration/materials/NBSA/reference.pth
+  - TI: DMKSGeneration/materials/TI/reference.pth 
 3. losses: contains loss functions.
 4. MKS: contains useful helper functions for generation, analysis, and testing.
 5. models: a folder containing various lightweight model implementations following the strategy described in the LGD paper.
